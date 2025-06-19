@@ -11,17 +11,17 @@ class Solution {
         return true;
     }
 
-    public boolean isValid(char[][] board, int row, int col, char num) {
+    public boolean isValid(char[][] board, int row, int col, char ch) {
 
         //for row checking
         for (int i = col + 1; i < 9; i++) {
-            if (board[row][i] == num)
+            if (board[row][i] == ch)
                 return false;
         }
 
         //For col checking
         for (int i = row + 1; i < 9; i++) {
-            if (board[i][col] == num)
+            if (board[i][col] == ch)
                 return false;
         }
 
@@ -29,7 +29,7 @@ class Solution {
         int x = row - row % 3, y = col - col % 3;
         for (int i = x; i < x + 3; i++) {
             for (int j = y; j < y + 3; j++) {
-                if (board[i][j] == num && !(i == row && j == col))
+                if (board[i][j] == ch && !(i == row && j == col))
                     return false;
             }
         }
