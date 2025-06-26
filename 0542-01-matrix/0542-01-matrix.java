@@ -10,7 +10,7 @@ class Solution {
                 if (mat[i][j] == 0) {
                     dp[i][j] = 0;
                 } else {
-                    dp[i][j] = Integer.MAX_VALUE - 100000; // Prevent overflow
+                    dp[i][j] = Integer.MAX_VALUE; // Prevent overflow
                 }
             }
         }
