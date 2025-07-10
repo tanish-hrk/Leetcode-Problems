@@ -54,7 +54,7 @@ class NumArray {
 
     public int query(int start, int end, int i, int l, int r){
         if(l>end || r<start) return 0;
-        else if(l<=start && r>=end) return segTree[i];
+        else if(l>=start && r<=end) return segTree[i];
         int mid = (l+r)/2;
         int leftT = query(start, end, 2*i+1, l, mid);
         int rightT = query(start, end, 2*i+2, mid+1, r);
