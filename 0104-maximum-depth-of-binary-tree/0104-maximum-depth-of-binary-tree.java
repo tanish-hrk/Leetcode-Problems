@@ -1,5 +1,5 @@
 /**
- * Definition for a binary tree root.
+ * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
  *     TreeNode left;
@@ -15,12 +15,23 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
+        int result = 0;
         if (root == null)
             return 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
 
-        int leftHeight = maxDepth(root.left);
-        int rightHeight = maxDepth(root.right);
-
-        return 1 + Math.max(leftHeight, rightHeight);
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+            result++;
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode curr = queue.poll();
+                if (curr.left != null)
+                    queue.add(curr.left);
+                if (curr.right != null)
+                    queue.add(curr.right);
+            }
+        }
+        return result;
     }
 }
