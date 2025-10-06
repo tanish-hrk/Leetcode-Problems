@@ -1,21 +1,29 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
-        if (s1.length() > s2.length()) return false;
+        int l1 = s1.length(), l2=s2.length();
+        if(l1 > l2) return false;
 
-        int[] count1 = new int[26];
-        int[] count2 = new int[26];
+       int[] count  = new int[26]; 
+       for(int i =0; i<l1; i++){
+            count[s1.charAt(i)-'a']++;
+            count[s2.charAt(i)-'a']--;
+       }
+        if(allZero(count)) return true;
 
-        for (int i = 0; i < s1.length(); i++) {
-            count1[s1.charAt(i) - 'a']++;
-            count2[s2.charAt(i) - 'a']++;
+        
+       for(int i=l1;i<l2;i++){
+            count[s2.charAt(i)-'a']--;
+            count[s2.charAt(i-l1)-'a']++;
+            if(allZero(count)) return true;
+       }
+
+       return false; 
+    }
+
+    private boolean allZero(int[] count){
+        for(int i=0;i<26;i++){
+            if(count[i]!=0) return false;
         }
-
-        for (int i = 0; i < s2.length() - s1.length(); i++) {
-            if (Arrays.equals(count1, count2)) return true;
-            count2[s2.charAt(i) - 'a']--;
-            count2[s2.charAt(i + s1.length()) - 'a']++;
-        }
-
-        return Arrays.equals(count1, count2);
+        return true;
     }
 }
